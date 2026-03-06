@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- link fav logo and  title name  -->
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+    <title>GitHub Issues Tracker</title>
+    <!-- link fontawosme for icon  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- link font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- link tailwin and daisyUI link  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- link css  -->
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <!-- nav section  -->
+    <nav>
+      <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row gap-4 p-4">
+        <div class="flex-1">
+          <div class="flex gap-[10px] items-center">
+            <div class="w-[36px] h-[37px]">
+              <img src="./assets/github-logo.png" alt="" />
+            </div>
+            <p>GitHub Issues Tracker</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <label class="input input-bordered flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass opacity-60"></i>
+            <input type="text" class="grow" placeholder="Search issues..." />
+          </label>
+          <button class="btn btn-primary">search</button>
+        </div>
+      </div>
+    </nav>
+    <!-- button section  -->
+    <section
+      class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#FFFFFF] mt-[75px] shadow-sm rounded-xl p-[32px]"
+    >
+      <div class="flex gap-[8px]">
+        <button
+          onclick="buttonStyle('All')"
+          id="allbutton"
+          class="stausBtn btn md:w-[120px] btn-primary"
+        >
+          All
+        </button>
+        <button
+          onclick="buttonStyle('Open')"
+          id="openbutton"
+          class="stausBtn btn md:w-[120px]"
+        >
+          Open
+        </button>
+        <button
+          onclick="buttonStyle('Closed')"
+          id="closedbutton"
+          class="stausBtn btn md:w-[120px]"
+        >
+          Closed
+        </button>
+      </div>
+    </section>
+
+    <!-- totoal issues section  -->
+    <section
+      class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#ffffff] shadow-sm rounded-xl p-[32px] mt-[16px]"
+    >
+      <div class="flex justify-between">
+        <div class="div1 flex items-center gap-[10px]">
+          <div><img src="./assets/Aperture.png" alt="" /></div>
+          <div>
+            <h1 class="text-[20px] font-semibold">
+              <span id="issue-counter">0</span> Issues
+            </h1>
+            <p class="hidden sm:block md:text-[16px] text-[#64748B]">
+              Track and manage your project issues
+            </p>
+          </div>
+        </div>
+        <div class="div2 flex gap-[16px]">
+          <div class="flex items-center gap-[8px]">
+            <div class="h-[12px] w-[12px] bg-[#00A96E] rounded-full"></div>
+            <p>Open</p>
+          </div>
+          <div class="flex items-center gap-[8px]">
+            <div class="h-[12px] w-[12px] bg-[#A855F7] rounded-full"></div>
+            <p>Closed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- problem card show  section  -->
+    <section
+      class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#ffffff] shadow-sm rounded-xl p-[32px] mt-[2px]"
+    >
+      <section
+        id="card-container"
+        class="grid grid-cols-4 gap-[13px] space-y-4"
+      >
+        <div
+          class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-sm "
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <img src="./assets/Open-Status.png" alt="" />
+            </div>
+            <span
+              class="px-5 py-1.5 text-xs font-semibold  text-yellow-700 bg-yellow-100 rounded-full"
+            >
+              MEDIUM
+            </span>
+          </div>
+
+          <div class="space-y-2 mb-5">
+            <h2 class="text-2xl font-semibold text-gray-900 ">
+              Fix Navigation Menu On Mobile Devices
+            </h2>
+            <p class="text-sm text-gray-600">
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+          </div>
+
+          <div
+            class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100"
+          >
+            <span
+              class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-red-600 bg-red-50 rounded-full border border-red-100"
+            >
+              <i class="fa-solid fa-bug text-red-500"></i> BUG
+            </span>
+
+            <span
+              class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-yellow-700 bg-yellow-50 rounded-full border border-yellow-200"
+            >
+              <i class="fa-solid fa-life-ring text-yellow-600"></i> HELP WANTED
+            </span>
+          </div>
+
+          <div class="text-sm text-gray-500 space-y-1">
+            <p class="font-medium">#1 by john_doe</p>
+            <p>1/15/2024</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <script src="./script/index.js"></script>
+    <script src="./script/button-style.js"></script>
+  </body>
+</html>
