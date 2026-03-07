@@ -78,9 +78,9 @@ const displayProblemDitals = (ditals) => {
   // change status bg
   let statusColorChange = " ";
   if (ditals.status === "open") {
-    statusColorChange = "text-green-700 bg-green-300 ";
+    statusColorChange = "text-green-700 bg-green-100 ";
   } else if (ditals.status === "closed") {
-    statusColorChange = "text-yellow-700 bg-yellow-200 ";
+    statusColorChange = "text-yellow-700 bg-yellow-100 ";
   }
 
   const dateOnly = createAt.slice(0, 10);
