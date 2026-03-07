@@ -41,45 +41,64 @@
   <body>
     <!-- nav section  -->
     <nav>
-      <div class="navbar bg-base-100 shadow-sm flex-col md:flex-row gap-4 p-4">
+      <div
+        class="navbar bg-base-100 shadow-sm flex-row justify-between gap-2 p-4"
+      >
         <div class="flex-1">
           <div class="flex gap-[10px] items-center">
             <div class="w-[36px] h-[37px]">
               <img src="./assets/github-logo.png" alt="" />
             </div>
-            <p>GitHub Issues Tracker</p>
+            <p class="hidden sm:block">GitHub Issues Tracker</p>
           </div>
         </div>
         <div class="flex gap-2">
-          <label class="input input-bordered flex items-center gap-2">
+          <label class="input flex input-bordered items-center gap-2">
             <i class="fa-solid fa-magnifying-glass opacity-60"></i>
-            <input id="input-search" type="text" class="grow" placeholder="Search issues..." />
+            <input
+              id="input-search"
+              type="text"
+              class="grow"
+              placeholder="Search issues..."
+            />
           </label>
-          <button id="btn-search" class="btn btn-primary">search</button>
+          <button id="btn-search" class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass md:hidden"></i>
+            <span class="hidden md:inline">search</span>
+          </button>
         </div>
       </div>
     </nav>
     <!-- button section  -->
     <section
-      class="w-11/12 sm:w-9/12  lg:w-10/12 mx-auto bg-[#FFFFFF] mt-[75px] shadow-sm rounded-xl p-[32px]"
+      class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#FFFFFF] mt-[75px] shadow-sm rounded-xl p-[32px]"
     >
       <div class="flex gap-[8px]">
         <button
-          onclick="buttonStyle('All') ; filterIssues('all')"
+          onclick="
+            buttonStyle('All');
+            filterIssues('all');
+          "
           id="allbutton"
           class="stausBtn btn md:w-[120px] btn-primary"
         >
           All
         </button>
         <button
-          onclick="buttonStyle('Open') ; filterIssues('open') "
+          onclick="
+            buttonStyle('Open');
+            filterIssues('open');
+          "
           id="openbutton"
           class="stausBtn btn md:w-[120px]"
         >
           Open
         </button>
         <button
-          onclick="buttonStyle('Closed') ; filterIssues('closed')"
+          onclick="
+            buttonStyle('Closed');
+            filterIssues('closed');
+          "
           id="closedbutton"
           class="stausBtn btn md:w-[120px]"
         >
@@ -119,17 +138,13 @@
 
     <!-- problem card show  section  -->
     <section
-      class="w-11/12  sm:w-9/12 lg:w-10/12 mx-auto bg-[#ffffff] shadow-sm rounded-xl p-[32px] mt-[2px]"
+      class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#ffffff] shadow-sm rounded-xl p-[32px] mt-[2px]"
     >
       <section
         id="card-container"
         class="md:grid grid-cols-2 lg:grid-cols-3 gap-[13px] space-y-4"
-      >
-        
-      </section>
+      ></section>
     </section>
-    
-    
 
     <script src="./script/index.js"></script>
     <script src="./script/button-style.js"></script>
