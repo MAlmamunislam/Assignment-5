@@ -126,7 +126,7 @@ const filterIssues = (status) => {
 };
 
 allIssuGet();
-
+// search data
 document.getElementById("btn-search").addEventListener("click", function () {
   const input = document.getElementById("input-search");
   const inputValue = input.value.trim().toLowerCase();
@@ -140,3 +140,16 @@ document.getElementById("btn-search").addEventListener("click", function () {
       allIssuDisplay(filterproblem);
     });
 });
+
+// search and button style change
+document.getElementById("btn-search").addEventListener("click", function () {
+
+   const allButton = document.getElementById('allbutton');
+    const openButton = document.getElementById('openbutton');
+    const closedButton = document.getElementById('closedbutton');
+
+    allButton.classList.remove('btn-primary');
+    openButton.classList.remove('btn-primary');
+    closedButton.classList.remove('btn-primary');
+
+  });
