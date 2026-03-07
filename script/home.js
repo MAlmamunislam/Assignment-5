@@ -34,6 +34,93 @@ const createEkements = (arr) => {
   });
   return htmlElements.join(" ");
 };
+
+// label for modal
+const createElements = (arr) => {
+  const htmlElement = arr.map((el) => {
+    let colorClasses = "";
+    if (el === "bug") {
+      colorClasses = "text-[#EF4444] bg-[#FECACA] border-red-300";
+    } else if (el === "enhancement") {
+      colorClasses = "text-green-700 bg-[#BBF7D0] border-green-300";
+    } else if (el === "good first issue") {
+      colorClasses = "text-orange-600 bg-orange-50 border-orange-300";
+    } else if (el === "help wanted") {
+      colorClasses = "text-[#D97706] bg-[#FDE68A] border-orange-300";
+    } else if (el === "documentation") {
+      colorClasses = "text-blue-600 bg-blue-50 border-blue-300";
+    }
+    return `
+       <span class="uppercase mr-[5px] px-3 py-1 text-[12px] font-bold rounded-full border ${colorClasses}">
+          ${el}
+       </span>
+     `;
+  });
+  return htmlElement.join(" ");
+};
+// modal desing
+const loadProblemDitals = (id) => {
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    .then((result) => result.json())
+    .then((data) => displayProblemDitals(data.data));
+};
+const displayProblemDitals = (ditals) => {
+  const createAt = ditals.createdAt;
+  // chnage prourity button color
+  let priorityColorChange = " ";
+  if (ditals.priority === "low") {
+    priorityColorChange = "text-green-700 bg-green-300 ";
+  } else if (ditals.priority === "medium") {
+    priorityColorChange = "text-yellow-700 bg-yellow-100 ";
+  } else if (ditals.priority === "high") {
+    priorityColorChange = "text-red-700 bg-red-100";
+  }
+  // change status bg
+  let statusColorChange = " ";
+  if (ditals.status === "open") {
+    statusColorChange = "text-green-700 bg-green-300 ";
+  } else if (ditals.status === "closed") {
+    statusColorChange = "text-yellow-700 bg-yellow-200 ";
+  }
+
+  const dateOnly = createAt.slice(0, 10);
+  const detalsContainer = document.getElementById("ditals-container");
+
+  detalsContainer.innerHTML = `
+  
+       <h1 class="text-2xl md:text-[24px] font-bold text-[#111827] mb-4 md:mb-6">
+           ${ditals.title}
+        </h1>
+        
+        <div class="flex flex-wrap items-center gap-2 mb-6 text-xs md:text-sm">
+            <span class="btn btn-xs md:btn-sm ${statusColorChange} px-3 rounded-full font-semibold">${ditals.status}</span>
+            <span class="text-gray-500"> Opened by ${ditals.assignee ? ditals.assignee : "Unassigneed"} . ${dateOnly}</span>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 mb-6 md:mb-8">
+           ${createElements(ditals.labels)}
+        </div>
+        
+        <p class="text-base md:text-xl text-[#374151] leading-relaxed  md:mb-12">
+           ${ditals.description}
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-6 md:items-start justify-between bg-[#fcf8f8] rounded-2xl p-6 md:p-8 mb-8 md:mb-10">
+            <div class="space-y-1 md:space-y-3">
+                <p class="text-sm md:text-[16px] text-gray-500 font-medium">Assignee:</p>
+                <p class="text-lg md:text-[16px] font-semibold text-[#111827]">${ditals.assignee ? ditals.assignee : "Unassigneed"}</p>
+            </div>
+            
+            <div class="space-y-1 md:space-y-3">
+                <p class="text-sm md:text-xl text-gray-500 font-medium">Priority:</p>
+                <span class="btn btn-xs md:btn-sm px-4  font-semibold ${priorityColorChange} border-none">${ditals.priority}</span>
+            </div>
+        </div>
+  
+  `;
+  document.getElementById("my_modal_5").showModal();
+};
+
 // all issue get
 
 const allIssuGet = () => {
@@ -72,7 +159,6 @@ const allIssuDisplay = (data) => {
         keywords.
       </p>
     </div>
-
     `;
   }
   data.forEach((element) => {
@@ -93,7 +179,7 @@ const allIssuDisplay = (data) => {
     } else if (element.priority === "high") {
       priorityColorChange = "text-red-700 bg-red-50";
     }
-
+    // time convet
     const createAt = element.createdAt;
     const dateOnly = createAt.slice(0, 10);
     const updatedAt = element.updatedAt;
@@ -102,6 +188,7 @@ const allIssuDisplay = (data) => {
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
            <div
+           onclick="loadProblemDitals(${element.id})"
           class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-sm border-t-4 ${statusColor} "
         >
           <div class="flex items-center justify-between mb-4">
