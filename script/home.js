@@ -38,7 +38,7 @@ const allIssuGet = () => {
 };
 // all issue display 
 const allIssuDisplay = (data) => {
-     console.log(data)
+     // console.log(data)
      totalIssue.innerText= data.length
   const allIssuCardParent = document.getElementById("card-container");
   allIssuCardParent.innerHTML='';
@@ -129,4 +129,17 @@ const filterIssues = (status) => {
 
 
 allIssuGet();
+
+document.getElementById('btn-search') .addEventListener('click' ,function () {
+     const input = document.getElementById('input-search');
+     const inputValue = input.value.trim().toLowerCase();
+     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+     .then(result => result.json())
+     .then(data => {
+          const allProblem = data.data;
+          const filterproblem = allProblem.filter(problem => problem.title.toLowerCase().includes(inputValue));
+           allIssuDisplay(filterproblem)
+     })
+     
+})
 
