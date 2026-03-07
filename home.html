@@ -62,7 +62,7 @@
               placeholder="Search issues..."
             />
           </label>
-          <button id="btn-search"  class="btn btn-primary">
+          <button id="btn-search" class="btn btn-primary">
             <i class="fa-solid fa-magnifying-glass md:hidden"></i>
             <span class="hidden md:inline">search</span>
           </button>
@@ -136,8 +136,13 @@
       </div>
     </section>
 
+    <section id="spinner" class="flex justify-center items-center py-25 hidden">
+      <span class="loading loading-infinity loading-xl"></span>
+    </section>
+
     <!-- problem card show  section  -->
     <section
+      id="word-paren-container"
       class="w-11/12 sm:w-9/12 lg:w-10/12 mx-auto bg-[#ffffff] shadow-sm rounded-xl p-[32px] mt-[2px]"
     >
       <section

@@ -1,5 +1,16 @@
 const totalIssue = document.getElementById("issue-counter");
 let allData = [];
+// loading spinner
+const manageSpiner = (status) => {
+  if (status === true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("word-paren-container").classList.add("hidden");
+  } else {
+    document.getElementById("word-paren-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
+
 // labels with color change
 const createEkements = (arr) => {
   const htmlElements = arr.map((el) => {
@@ -26,6 +37,7 @@ const createEkements = (arr) => {
 // all issue get
 
 const allIssuGet = () => {
+  manageSpiner(true);
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((result) => result.json())
     .then((data) => {
@@ -39,6 +51,30 @@ const allIssuDisplay = (data) => {
   totalIssue.innerText = data.length;
   const allIssuCardParent = document.getElementById("card-container");
   allIssuCardParent.innerHTML = "";
+  // if search output = 0
+  if (data.length == 0) {
+    allIssuCardParent.innerHTML = `
+        <div
+      class="flex flex-col items-center justify-center py-20 w-full text-center col-span-full"
+    >
+      <div class=" mb-4">
+        <div class="order-2 w-[200px] rounded-3xl overflow-hidden">
+          <img
+            src="./assets/9214780.jpg"
+            alt=""
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800">No Issues Found!</h2>
+      <p class="text-gray-500 mt-2 max-w-xs">
+        We couldn't find any issues matching your search. Try using different
+        keywords.
+      </p>
+    </div>
+
+    `;
+  }
   data.forEach((element) => {
     // change border color
     const statusColor =
@@ -111,10 +147,12 @@ const allIssuDisplay = (data) => {
           `;
     allIssuCardParent.appendChild(newDiv);
   });
+  manageSpiner(false);
 };
 // filter data
 
 const filterIssues = (status) => {
+  manageSpiner(true);
   if (status !== "all") {
     const filtered = allData.filter(
       (item) => item.status.toLowerCase() === status.toLowerCase(),
@@ -130,6 +168,7 @@ allIssuGet();
 document.getElementById("btn-search").addEventListener("click", function () {
   const input = document.getElementById("input-search");
   const inputValue = input.value.trim().toLowerCase();
+  manageSpiner(true);
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((result) => result.json())
     .then((data) => {
@@ -143,13 +182,11 @@ document.getElementById("btn-search").addEventListener("click", function () {
 
 // search and button style change
 document.getElementById("btn-search").addEventListener("click", function () {
+  const allButton = document.getElementById("allbutton");
+  const openButton = document.getElementById("openbutton");
+  const closedButton = document.getElementById("closedbutton");
 
-   const allButton = document.getElementById('allbutton');
-    const openButton = document.getElementById('openbutton');
-    const closedButton = document.getElementById('closedbutton');
-
-    allButton.classList.remove('btn-primary');
-    openButton.classList.remove('btn-primary');
-    closedButton.classList.remove('btn-primary');
-
-  });
+  allButton.classList.remove("btn-primary");
+  openButton.classList.remove("btn-primary");
+  closedButton.classList.remove("btn-primary");
+});
