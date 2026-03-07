@@ -1,5 +1,5 @@
 const totalIssue = document.getElementById("issue-counter");
-
+let allData = [];
 // labels with color change 
 const createEkements = (arr) => {
   const htmlElements = arr.map((el) => {
@@ -31,7 +31,10 @@ const createEkements = (arr) => {
 const allIssuGet = () => {
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((result) => result.json())
-    .then((data) => allIssuDisplay(data.data));
+    .then((data) => {
+     allData = data.data;
+     allIssuDisplay(data.data)
+});
 };
 // all issue display 
 const allIssuDisplay = (data) => {
@@ -111,4 +114,19 @@ const allIssuDisplay = (data) => {
     allIssuCardParent.appendChild(newDiv);
   });
 };
+// filter data 
+
+const filterIssues = (status) => {
+   if(status !== 'all') {
+        // .toLowerCase() ব্যবহারের ফলে All বাটন আর হারাবে না
+        const filtered = allData.filter(item => item.status.toLowerCase() === status.toLowerCase());
+        allIssuDisplay(filtered);
+    }
+    else if(status === 'all'){
+     allIssuDisplay(allData)
+    }
+}
+
+
 allIssuGet();
+
