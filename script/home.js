@@ -189,7 +189,7 @@ const allIssuDisplay = (data) => {
     newDiv.innerHTML = `
            <div
            onclick="loadProblemDitals(${element.id})"
-          class="max-w-md h-90 p-6 bg-white border border-gray-200 rounded-lg shadow-sm border-t-4 ${statusColor} "
+          class="max-w-md h-100 p-6 bg-white border border-gray-200 rounded-lg shadow-sm border-t-4 ${statusColor} "
         >
           <div class="flex items-center justify-between mb-4">
             <div>
